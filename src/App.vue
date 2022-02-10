@@ -4,20 +4,29 @@
       <p>
         Aquest joc ha sigut desenvolupat com a prova de concepte de Vue.js 3.
       </p>
-      <p>
-        Dedicat a la Judit :)
-      </p>
+      <p>Dedicat a la Judit :)</p>
       <button class="button" v-on:click="newGame">Comença el joc!</button>
     </template>
     <template v-if="playing">
       <Stats :time="time" :score="score" :rights="rights" :wrongs="wrongs" />
+
       <Question :question="question" />
+
       <div class="answers">
-        <Answer class="answer" :option="option1" @answer="answered($event)" />
-        <Answer class="answer" :option="option2" @answer="answered($event)" />
+        <Answer
+          class="answer"
+          :option="option1"
+          @answer="answered($event)"
+          :class="{ grow: animating }"
+        />
+        <Answer
+          class="answer"
+          :option="option2"
+          @answer="answered($event)"
+          :class="{ grow: animating }"
+        />
       </div>
     </template>
-
     <GameOver
       v-if="!playing && !firstGame"
       :score="score"
@@ -89,6 +98,10 @@ export default {
         this.wrongs++;
         this.score = this.score - 2;
       }
+      this.animating = true;
+      setTimeout(() => {
+        this.animating = false;
+      }, 100);
       this.newQuestion();
     },
     newQuestion() {
@@ -96,6 +109,7 @@ export default {
       let tmp = Math.floor(Math.random() * 2);
       this.option1 = this.items[tmp];
       this.option2 = this.items[(tmp + 1) % 2];
+
       return this.question;
     },
     gameOver() {
@@ -108,6 +122,22 @@ export default {
 </script>
 
 <style>
+.grow {
+  animation: grow-animation 0.1s linear;
+}
+
+@keyframes grow-animation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 #app {
   font-family: "Basier circle", -apple-system, system-ui, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",

@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div>
    <img @click="answer()"  :src="picPath">
   </div>
 </template>

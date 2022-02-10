@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <p>Gràcies per jugar</p>
     <table>
       <tr>
         <th>Punts</th>
@@ -12,10 +13,9 @@
         <td>{{ wrongs }}</td>
       </tr>
     </table>
-    
+
     <button class="button" v-if="!playing" v-on:click="answer()">
       Vull tornar a jugar!
-
     </button>
   </div>
 </template>
