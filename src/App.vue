@@ -132,7 +132,7 @@ body {
 }
 
 .button {
-  
+  margin-top: 50px;
   background-color: rgba(255, 255, 255, 0.918);
   border: 0 solid #e2e8f0;
   border-radius: 1.5rem;
